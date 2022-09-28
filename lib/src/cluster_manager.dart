@@ -114,12 +114,7 @@ class ClusterManager<T extends ClusterItem> {
     final LatLngBounds mapBounds = await GoogleMapsFlutterPlatform.instance
         .getVisibleRegion(mapId: _mapId!);
 
-    late LatLngBounds inflatedBounds;
-    if (clusterAlgorithm == ClusterAlgorithm.GEOHASH) {
-      inflatedBounds = _inflateBounds(mapBounds);
-    } else {
-      inflatedBounds = mapBounds;
-    }
+    final inflatedBounds = _inflateBounds(mapBounds);
 
     List<T> visibleItems = items.where((i) {
       return inflatedBounds.contains(i.location);
